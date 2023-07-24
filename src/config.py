@@ -14,10 +14,10 @@ import undetected_chromedriver as uc
 # service = Service(executable_path='/home/vksource/KDMarket/chromedriver/chromedriver')
 #
 
-def set_up():
+def set_up() -> uc.Chrome:
     return uc.Chrome()
 
-
+# os.environ()
 URL = 'https://kdmarket.ru'
 START_URL = 'https://kdmarket.ru/catalog'
 

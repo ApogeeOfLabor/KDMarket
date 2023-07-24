@@ -1,6 +1,5 @@
-from time import sleep
-from src import *
 import os
+from src import maker, config, getter, router
 
 
 def main():
@@ -20,6 +19,9 @@ def main():
     # catalog_data = [['КАТЕГОРИЯ', 'ССЫЛКА'], [header_values, header_links]]
     # file_name = maker.make_csv(name=catalog_name, data=catalog_data, addr=catalog_dir_addr)
 
+    driver.close()
+    driver.quit()
+
     content = getter.get_file_content(f'{catalog_dir_addr}/start_{config.START_URL.split("/")[-1]}.csv')
     """ f'{catalog_dir_addr}/start_{const.START_URL.split("/")[-1]}.csv' ----- file_name"""
 
@@ -34,23 +36,13 @@ def main():
 if __name__ == '__main__':
     main()
 
-
-
-
-
-
-    """ TODO: парсим асинхронно блок с карточками собирая только ссылки на каждый блок отдельно """
-    """ TODO: создаём дирректорию для каждой подкатегории к примеру СМАРТФОН Apple """
-    """ TODO: заходим в эту дирректорию """
-    """ TODO: тут кладём csv_min с сылками именно по этому превью блоку к примеру СМАРТФОН или ПЛАНШЕТ """
-    """ TODO: дальше уже заходим в каждую карточку, парсим ссылки по возможным цветам  """
-    """ TODO: тут кладём csv_full с сылками уже на каждый дивайс """
     """ TODO: далее на примере одной - двух карточках с каждой категории строим итоговый шаблон списков с данными """
     """ TODO: в итоге разные блоки-категории парсим в несколько ядер(браузеров) через proxy асинхронно """
     """ TODO: структура каталогов в YAML.config """
     """ TODO: structure_tree.yaml
-    catalog   - ТЕХНИКА APPLE         - СМАРТФОН      - file.csv
-                        - file.csv                              - /image/*.jpg
+    catalog   - ТЕХНИКА APPLE                   - СМАРТФОН      - file.csv
+                                                                - /image/*.jpg
+                                                                - /SUBCATEGORY-NAME_preview/*.jpg
                                                 - ПЛАНШЕТ
                                                 - НАУШНИКИ
                                                 - НОУТБУК
@@ -58,49 +50,16 @@ if __name__ == '__main__':
                                                 - и т.д.
                         - МОБИЛЬНЫЕ ТЕЛЕФОНЫ
                         - file.csv
-
                         - ПЛАНШЕТЫ
                         - file.csv
-
                         - ИГРОВЫЕ ПРИСТАВКИ
                         - file.csv
-
                         - ГАДЖЕТЫ
                         - file.csv
-
                         - ТЕХНИКА XIAOMI
                         - file.csv
-
                         - ТЕХНИКА DYSON
                         - file.csv
-
-                        - АУДИО
-                        - file.csv
-
-                        - ДЛЯ ДОМА
-                        - file.csv
-
-                        - КРАСОТА И ЗДОРОВЬЕ
-                        - file.csv
-
-                        - ДЛЯ КУХНИ
-                        - file.csv
-
+                        и т.д.
     """
     """ TODO: подумать возможно ли реализовать движение мышкой - аналог реального человека """
-
-
-
-    # driver = config.set_up()
-    # try:
-    #     getter.get_url(driver, link='https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html')
-    #     # getter.get_url(driver, link='')
-    #     sleep(10)
-    # except Exception as ex:
-    #     print(ex)
-    # finally:
-    #     driver.close()
-    #     driver.quit()
-
-
-
