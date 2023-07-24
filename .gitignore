@@ -1,8 +1,11 @@
 .idea/*
-kdenv/*
+venv/*
 *.html
 *.jpg
 *.jpeg
 *.png
 *.JPG
 *.PNG
+/chromedriver/chromedriver
+/chromedriver/geckodriver.log
+/src/geckodriver/geckodriver

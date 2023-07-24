@@ -1,11 +1,12 @@
 
 import asyncio
+import os
 from proxybroker import Broker
 
 
 async def save(proxies, filename):
     """Save proxies to a file."""
-    with open(filename, 'w') as f:
+    with open(filename, 'w+') as f:
         while True:
             proxy = await proxies.get()
             if proxy is None:
@@ -18,8 +19,8 @@ async def save(proxies, filename):
 def main():
     proxies = asyncio.Queue()
     broker = Broker(proxies)
-    tasks = asyncio.gather(broker.find(types=['HTTP', 'HTTPS'], limit=10),
-                           save(proxies, filename='proxies.txt'))
+    tasks = asyncio.gather(broker.find(types=['HTTP', 'HTTPS'], limit=100),
+                           save(proxies, filename=f'{os.path.dirname(__file__)}/proxies.txt'))
     loop = asyncio.get_event_loop()
     loop.run_until_complete(tasks)
 
